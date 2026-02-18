@@ -5,6 +5,16 @@
 **Status**: Draft  
 **Input**: User description: "Add ability to delete a timer from the list"
 
+## Clarifications
+
+### Session 2026-02-18
+
+- Q: What should the delete button look like to differentiate it from other action buttons? → A: Trash/delete icon in gray (#9E9E9E), same size as other SVG icons (20x20px)
+- Q: When a timer is deleted mid-execution, what should happen to its internal state and any active intervals? → A: Cleanup internal state first (cancel intervals), then trigger parent removal via callback
+- Q: Should users be able to delete timers using keyboard navigation and interaction? → A: No keyboard support - mouse/touch only for this MVP
+- Q: Should new timers potentially receive the same ID as deleted timers? → A: No - new timers always get fresh unique IDs via uuidv4()
+- Q: When the last timer is deleted, what should the UI display? → A: Only "Add Timer" button visible in current grid layout position
+
 ## User Scenarios & Testing
 
 ### User Story 1 - Remove Individual Timer (Priority: P1)
@@ -19,7 +29,7 @@ Users need the ability to remove a specific timer from their list of active time
 
 1. **Given** user has multiple timers running, **When** user clicks delete button on one timer, **Then** that timer is removed from the list and other timers continue running
 2. **Given** user has a timer in idle state, **When** user clicks delete button, **Then** timer is removed from the list
-3. **Given** user has only one timer, **When** user clicks delete button, **Then** timer is removed and the list becomes empty (only "Add Timer" button visible)
+3. **Given** user has only one timer, **When** user clicks delete button, **Then** timer is removed and only the "Add Timer" button remains visible in the grid (no empty state message)
 
 ---
 
@@ -54,9 +64,9 @@ Users may want to delete a timer even while it's actively running, without stopp
 
 ### Edge Cases
 
-- What happens when user attempts to delete and immediately adds a new timer?
-- What if user deletes a timer that was about to complete?
-- What if user accidentally deletes a timer? (No undo in current scope, but should be noted for future improvements)
+- **Rapid delete-and-add**: When user deletes a timer and immediately adds a new one (synchronously), the new timer MUST receive a fresh unique ID - IDs are never recycled within a session
+- **Delete while pending update**: If user deletes a timer while an update interval is pending, the delete cleanup MUST cancel the pending update to prevent stale state modifications
+- **Accidentally deleted timer**: No undo/recovery available - deletion is permanent and this is acceptable for MVP scope
 
 ## Requirements
 
@@ -65,10 +75,11 @@ Users may want to delete a timer even while it's actively running, without stopp
 - **FR-001**: Timer component MUST accept a delete callback function as a prop
 - **FR-002**: Delete button MUST be visible on all timer cards regardless of timer state (idle, running, paused)
 - **FR-003**: Clicking delete button MUST trigger removal of the timer from the parent list
-- **FR-004**: Deleting a timer MUST stop any ongoing interval timers and clear all timer state
+- **FR-004**: Deleting a timer MUST cancel all internal interval timers and clear all component state (refs, useState) BEFORE triggering parent removal callback to prevent stale updates
 - **FR-005**: Deleted timer MUST be completely removed from the UI with no visual trace remaining
 - **FR-006**: Deletion MUST be immediate and synchronous (no loading states or delays)
-- **FR-007**: Delete button MUST have a distinct visual appearance to differentiate from action buttons (start/pause/stop)
+- **FR-007**: Delete button MUST display a trash/delete icon in gray (#9E9E9E) at 20x20px size to clearly signal destructive action and differentiate from action buttons (start/pause/stop)
+- **FR-008**: When all timers are deleted, the App MUST display only the "Add Timer" button with no empty state message or placeholder content
 
 ### Key Entities
 
@@ -92,6 +103,8 @@ Users may want to delete a timer even while it's actively running, without stopp
 - Timer list state is managed at App component level, not in a global state management system
 - Delete button should not require confirmation modal to maintain simplicity and speed
 - Timer IDs are unique and immutable for the duration of app session
+- Keyboard accessibility (Tab focus, keyboard activation) is NOT required for this MVP - mouse/touch interaction only
+- Full keyboard support and WCAG compliance are deferred to future enhancement
 
 ## Implementation Notes
 
