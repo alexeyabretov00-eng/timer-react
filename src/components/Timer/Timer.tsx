@@ -104,7 +104,7 @@ export const Timer: React.FC<TimerProps> = ({ id, onDelete }) => {
                 <Text isActive={status === 'started'}>{formatValue(value)}</Text>
                 <Separator isActive={status === 'started'}/>
                 <ButtonsWrapper>
-                    {['idle', 'paused'].includes(status) && <StartButton onClick={onStart} />}
+                    {['idle', 'paused'].includes(status) && <StartButton onClick={onStart} isActive={true} />}
                     {status === 'started' && <PauseButton onClick={onPaused} />}
                     <StopButton onClick={onStop} isActive={status === 'started'} />
                     <DeleteButton onClick={onDeleteClick} />
