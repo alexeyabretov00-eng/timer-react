@@ -18,13 +18,13 @@ Tasks are organized by user story and execution phase. Each task is **independen
 ## Phase 1: Setup & Preparation
 
 ### T001: Validate Environment Setup
-- [ ] T001 [P] Verify Node.js version (v16+)
-- [ ] T001 [P] Verify npm installed and working
-- [ ] T001 [P] Verify project dependencies installed (`npm list react`)
-- [ ] T001 [P] Verify TypeScript compiler available (`npm run build --dry-run`)
-- [ ] T001 [P] Verify dev server startable (`npm run dev --version`)
-- [ ] T001 [P] Verify Git branch is `001-delete-timer`
-- [ ] T001 [P] Verify working directory is clean (`git status`)
+- [x] T001 [P] Verify Node.js version (v16+)
+- [x] T001 [P] Verify npm installed and working
+- [x] T001 [P] Verify project dependencies installed (`npm list react`)
+- [x] T001 [P] Verify TypeScript compiler available (`npm run build --dry-run`)
+- [x] T001 [P] Verify dev server startable (`npm run dev --version`)
+- [x] T001 [P] Verify Git branch is `001-delete-timer`
+- [x] T001 [P] Verify working directory is clean (`git status`)
 
 **Acceptance Criteria**:
 - All tools operational
@@ -38,12 +38,12 @@ Tasks are organized by user story and execution phase. Each task is **independen
 ---
 
 ### T002: Review Documentation
-- [ ] T002 [P] Read specification (spec.md) - all sections
-- [ ] T002 [P] Review implementation plan (plan.md)
-- [ ] T002 [P] Review data model (data-model.md) - cleanup sequence critical
-- [ ] T002 [P] Bookmark quickstart.md for reference
-- [ ] T002 [P] Review contracts (DeleteButton, Timer, App)
-- [ ] T002 [P] Understand constitution requirements (.specify/memory/constitution.md)
+- [x] T002 [P] Read specification (spec.md) - all sections
+- [x] T002 [P] Review implementation plan (plan.md)
+- [x] T002 [P] Review data model (data-model.md) - cleanup sequence critical
+- [x] T002 [P] Bookmark quickstart.md for reference
+- [x] T002 [P] Review contracts (DeleteButton, Timer, App)
+- [x] T002 [P] Understand constitution requirements (.specify/memory/constitution.md)
 
 **Acceptance Criteria**:
 - All docs reviewed
@@ -59,16 +59,16 @@ Tasks are organized by user story and execution phase. Each task is **independen
 ## Phase 2: Core Implementation
 
 ### T003: Create DeleteButton Component File
-- [ ] T003 [P] Create directory: `src/components/DeleteButton/`
-- [ ] T003 [P] Create file: `src/components/DeleteButton/DeleteButton.tsx`
-- [ ] T003 [P] Import React from "react"
-- [ ] T003 [P] Import ActionButton from "../ActionButton"
-- [ ] T003 [P] Define DeleteButtonProps interface: `{ onClick: () => void }`
-- [ ] T003 [P] Export DeleteButton as React.FC<DeleteButtonProps>
-- [ ] T003 [P] Render ActionButton with onClick prop wrapping SVG
-- [ ] T003 [P] Add trash icon SVG (20x20px viewBox, #9E9E9E stroke)
-- [ ] T003 [P] Verify: No TypeScript errors in file
-- [ ] T003 [P] Verify: Component is stateless (no useState/useRef)
+- [x] T003 [P] Create directory: `src/components/DeleteButton/`
+- [x] T003 [P] Create file: `src/components/DeleteButton/DeleteButton.tsx`
+- [x] T003 [P] Import React from "react"
+- [x] T003 [P] Import ActionButton from "../ActionButton"
+- [x] T003 [P] Define DeleteButtonProps interface: `{ onClick: () => void }`
+- [x] T003 [P] Export DeleteButton as React.FC<DeleteButtonProps>
+- [x] T003 [P] Render ActionButton with onClick prop wrapping SVG
+- [x] T003 [P] Add trash icon SVG (20x20px viewBox, #9E9E9E stroke)
+- [x] T003 [P] Verify: No TypeScript errors in file
+- [x] T003 [P] Verify: Component is stateless (no useState/useRef)
 
 **Acceptance Criteria**:
 - File created at correct path
@@ -86,10 +86,10 @@ Tasks are organized by user story and execution phase. Each task is **independen
 ---
 
 ### T004: Create DeleteButton Barrel Export
-- [ ] T004 [P] Create file: `src/components/DeleteButton/index.ts`
-- [ ] T004 [P] Add export statement: `export { DeleteButton } from './DeleteButton';`
-- [ ] T004 [P] Verify syntax is correct
-- [ ] T004 [P] Verify imports from this file work in other modules
+- [x] T004 [P] Create file: `src/components/DeleteButton/index.ts`
+- [x] T004 [P] Add export statement: `export { DeleteButton } from './DeleteButton';`
+- [x] T004 [P] Verify syntax is correct
+- [x] T004 [P] Verify imports from this file work in other modules
 
 **Acceptance Criteria**:
 - File created at correct path
@@ -105,15 +105,15 @@ Tasks are organized by user story and execution phase. Each task is **independen
 ---
 
 ### T005: Update Timer Component Props Interface
-- [ ] T005 [P] Open `src/components/Timer/Timer.tsx`
-- [ ] T005 [P] Locate current component definition (around line 20)
-- [ ] T005 [P] Create TimerProps interface with:
+- [x] T005 [P] Open `src/components/Timer/Timer.tsx`
+- [x] T005 [P] Locate current component definition (around line 20)
+- [x] T005 [P] Create TimerProps interface with:
   - `id: string` (timer identifier)
   - `onDelete: (id: string) => void` (delete callback)
-- [ ] T005 [P] Update component signature to: `export const Timer: React.FC<TimerProps>`
-- [ ] T005 [P] Update destructuring: `({ id, onDelete })`
-- [ ] T005 [P] Verify TypeScript compiles without errors
-- [ ] T005 [P] Verify no implicit `any` types
+- [x] T005 [P] Update component signature to: `export const Timer: React.FC<TimerProps>`
+- [x] T005 [P] Update destructuring: `({ id, onDelete })`
+- [x] T005 [P] Verify TypeScript compiles without errors
+- [x] T005 [P] Verify no implicit `any` types
 
 **Acceptance Criteria**:
 - TimerProps interface created with both props
@@ -130,11 +130,11 @@ Tasks are organized by user story and execution phase. Each task is **independen
 ---
 
 ### T006: Import DeleteButton in Timer Component
-- [ ] T006 [P] Open `src/components/Timer/Timer.tsx`
-- [ ] T006 [P] Locate imports section at top
-- [ ] T006 [P] Add import: `import { DeleteButton } from '../DeleteButton';`
-- [ ] T006 [P] Verify import path is correct to barrel export
-- [ ] T006 [P] Verify import is placed with other component imports
+- [x] T006 [P] Open `src/components/Timer/Timer.tsx`
+- [x] T006 [P] Locate imports section at top
+- [x] T006 [P] Add import: `import { DeleteButton } from '../DeleteButton';`
+- [x] T006 [P] Verify import path is correct to barrel export
+- [x] T006 [P] Verify import is placed with other component imports
 
 **Acceptance Criteria**:
 - Import statement syntactically correct
@@ -150,9 +150,9 @@ Tasks are organized by user story and execution phase. Each task is **independen
 ---
 
 ### T007: Create Delete Handler in Timer Component
-- [ ] T007 [P] Open `src/components/Timer/Timer.tsx`
-- [ ] T007 [P] Locate `onPaused` handler (around line 76)
-- [ ] T007 [P] Add `onDeleteClick` handler after `onPaused`:
+- [x] T007 [P] Open `src/components/Timer/Timer.tsx`
+- [x] T007 [P] Locate `onPaused` handler (around line 76)
+- [x] T007 [P] Add `onDeleteClick` handler after `onPaused`:
   ```typescript
   const onDeleteClick = () => {
     clearTimeout(intervalId.current);
@@ -162,10 +162,10 @@ Tasks are organized by user story and execution phase. Each task is **independen
     onDelete(id);
   }
   ```
-- [ ] T007 [P] Verify cleanup executes BEFORE parent callback
-- [ ] T007 [P] Verify all refs are reset to 0/null
-- [ ] T007 [P] Verify parent callback invoked with `id` parameter
-- [ ] T007 [P] Verify no TypeScript errors in handler
+- [x] T007 [P] Verify cleanup executes BEFORE parent callback
+- [x] T007 [P] Verify all refs are reset to 0/null
+- [x] T007 [P] Verify parent callback invoked with `id` parameter
+- [x] T007 [P] Verify no TypeScript errors in handler
 
 **Acceptance Criteria**:
 - Handler created with correct name
@@ -184,16 +184,16 @@ Tasks are organized by user story and execution phase. Each task is **independen
 ---
 
 ### T008: Render DeleteButton in Timer Component
-- [ ] T008 [P] Open `src/components/Timer/Timer.tsx`
-- [ ] T008 [P] Locate ButtonsWrapper section (around line 112)
-- [ ] T008 [P] Find StopButton render
-- [ ] T008 [P] Add DeleteButton after StopButton:
+- [x] T008 [P] Open `src/components/Timer/Timer.tsx`
+- [x] T008 [P] Locate ButtonsWrapper section (around line 112)
+- [x] T008 [P] Find StopButton render
+- [x] T008 [P] Add DeleteButton after StopButton:
   ```typescript
   <DeleteButton onClick={onDeleteClick} />
   ```
-- [ ] T008 [P] Verify DeleteButton has onClick prop wired to handler
-- [ ] T008 [P] Verify placement in ButtonsWrapper (correct location)
-- [ ] T008 [P] Verify no JSX syntax errors
+- [x] T008 [P] Verify DeleteButton has onClick prop wired to handler
+- [x] T008 [P] Verify placement in ButtonsWrapper (correct location)
+- [x] T008 [P] Verify no JSX syntax errors
 
 **Acceptance Criteria**:
 - DeleteButton rendered in ButtonsWrapper
@@ -210,17 +210,17 @@ Tasks are organized by user story and execution phase. Each task is **independen
 ---
 
 ### T009: Create Delete Handler in App Component
-- [ ] T009 [P] Open `src/App.tsx`
-- [ ] T009 [P] Locate `onAdd` handler (around line 18)
-- [ ] T009 [P] Add `onDeleteTimer` handler after `onAdd`:
+- [x] T009 [P] Open `src/App.tsx`
+- [x] T009 [P] Locate `onAdd` handler (around line 18)
+- [x] T009 [P] Add `onDeleteTimer` handler after `onAdd`:
   ```typescript
   const onDeleteTimer = (id: string) => {
     setTimers(timers.filter(timer => timer.id !== id));
   };
   ```
-- [ ] T009 [P] Verify filter uses immutable array operation (not splice)
-- [ ] T009 [P] Verify handler signature matches Timer's onDelete type
-- [ ] T009 [P] Verify no TypeScript errors
+- [x] T009 [P] Verify filter uses immutable array operation (not splice)
+- [x] T009 [P] Verify handler signature matches Timer's onDelete type
+- [x] T009 [P] Verify no TypeScript errors
 
 **Acceptance Criteria**:
 - Handler created and properly scoped
@@ -237,9 +237,9 @@ Tasks are organized by user story and execution phase. Each task is **independen
 ---
 
 ### T010: Update Timer Mapping in App Component
-- [ ] T010 [P] Open `src/App.tsx`
-- [ ] T010 [P] Find Timer rendering in return section (around line 35)
-- [ ] T010 [P] Change from:
+- [x] T010 [P] Open `src/App.tsx`
+- [x] T010 [P] Find Timer rendering in return section (around line 35)
+- [x] T010 [P] Change from:
   ```typescript
   {timers.map(x => <Timer key={x.id} />)}
   ```
@@ -247,11 +247,11 @@ Tasks are organized by user story and execution phase. Each task is **independen
   ```typescript
   {timers.map(x => <Timer key={x.id} id={x.id} onDelete={onDeleteTimer} />)}
   ```
-- [ ] T010 [P] Verify `key` prop unchanged (React requirement)
-- [ ] T010 [P] Verify `id` prop passed with `x.id`
-- [ ] T010 [P] Verify `onDelete` prop passed with handler
-- [ ] T010 [P] Verify JSX syntax is correct
-- [ ] T010 [P] Verify no TypeScript errors
+- [x] T010 [P] Verify `key` prop unchanged (React requirement)
+- [x] T010 [P] Verify `id` prop passed with `x.id`
+- [x] T010 [P] Verify `onDelete` prop passed with handler
+- [x] T010 [P] Verify JSX syntax is correct
+- [x] T010 [P] Verify no TypeScript errors
 
 **Acceptance Criteria**:
 - Timer mapping includes all 3 props (key, id, onDelete)
@@ -268,10 +268,10 @@ Tasks are organized by user story and execution phase. Each task is **independen
 ---
 
 ### T011: Add DeleteButton to Components Barrel Export
-- [ ] T011 [P] Open `src/components/index.ts`
-- [ ] T011 [P] Add export line: `export { DeleteButton } from './DeleteButton';`
-- [ ] T011 [P] Verify syntax is correct
-- [ ] T011 [P] Verify other exports remain unchanged
+- [x] T011 [P] Open `src/components/index.ts`
+- [x] T011 [P] Add export line: `export { DeleteButton } from './DeleteButton';`
+- [x] T011 [P] Verify syntax is correct
+- [x] T011 [P] Verify other exports remain unchanged
 
 **Acceptance Criteria**:
 - Export line added
@@ -290,11 +290,11 @@ Tasks are organized by user story and execution phase. Each task is **independen
 ## Phase 3: Verification & Testing
 
 ### T012: TypeScript Compilation Check
-- [ ] T012 [P] Run: `npm run build`
-- [ ] T012 [P] Verify: No TypeScript compilation errors
-- [ ] T012 [P] Verify: No implicit `any` type warnings
-- [ ] T012 [P] Verify: All imports resolve correctly
-- [ ] T012 [P] Verify: Output artifacts generated in dist/
+- [x] T012 [P] Run: `npm run build`
+- [x] T012 [P] Verify: No TypeScript compilation errors
+- [x] T012 [P] Verify: No implicit `any` type warnings
+- [x] T012 [P] Verify: All imports resolve correctly
+- [x] T012 [P] Verify: Output artifacts generated in dist/
 
 **Acceptance Criteria**:
 - Build completes successfully
