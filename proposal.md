@@ -11,7 +11,7 @@ Developers, designers, and knowledge workers frequently need to time multiple co
 ## Goals
 
 - Allow users to add as many independent timers as needed on one page.
-- Provide clear start, pause, and stop controls per timer.
+- Provide clear start, pause, stop, and **delete** (with confirmation) controls per timer.
 - Display elapsed time accurately in a human-readable `H:MM:SS` format.
 - Keep the UI minimal, fast, and purely client-side with no backend dependency.
 
@@ -32,12 +32,14 @@ The app is a single-page application with a flat component hierarchy:
 App
 ├── Timer (×N, one per added timer)
 │   ├── Block (card container)
+│   ├── DeleteButton (top-right, triggers confirm-delete state)
+│   ├── ConfirmDeletePopup (portal popup on confirm-delete state)
 │   ├── Text (elapsed time display)
 │   └── Buttons (Start | Pause, Stop)
 └── AddButton (creates a new Timer instance)
 ```
 
-Each `Timer` manages its own state (`idle | started | paused`) and elapsed time using React `useState` and `useRef`, with a self-scheduling `setTimeout` loop that corrects for drift.
+Each `Timer` manages its own state (`idle | started | paused | confirm-delete`) and elapsed time using React `useState` and `useRef`, with a self-scheduling `setTimeout` loop that corrects for drift.
 
 ### Key Interactions
 
@@ -47,6 +49,9 @@ Each `Timer` manages its own state (`idle | started | paused`) and elapsed time 
 | Start | `idle` or `paused` | Timer begins/resumes counting |
 | Pause | `started` | Timer freezes; elapsed time preserved |
 | Stop | `started` or `paused` | Timer resets to `0` and returns to `idle` |
+| Delete (✕) | any state | Timer enters `confirm-delete`; popup appears |
+| Confirm delete | `confirm-delete` | Timer removed from page |
+| Cancel delete | `confirm-delete` | Timer returns to prior state |
 
 ### Time Display
 
@@ -68,25 +73,31 @@ Elapsed time is rendered as:
 
 ```
 src/
-  App.tsx                   # Root: manages list of timer IDs
+  App.tsx                        # Root: manages list of timer IDs
   components/
-    Timer/                  # Core timer logic and display
-    AddButton/              # Adds a new timer instance
-    ActionButton/           # Base styled button
-    StartButton/            # Start control
-    PauseButton/            # Pause control
-    StopButton/             # Stop control
-    Block/                  # Card wrapper
-    Text/                   # Elapsed time label
+    Timer/                         # Core timer logic and state machine
+    AddButton/                     # Adds a new timer instance
+    ActionButton/                  # Base styled button
+    StartButton/                   # Start control
+    PauseButton/                   # Pause control
+    StopButton/                    # Stop control
+    DeleteButton/                  # Triggers confirm-delete state
+    ConfirmDeletePopup/            # Portal-based delete confirmation popup
+    Block/                         # Card wrapper
+    Text/                          # Elapsed time label
   styles/
-    GlobalStyles.tsx        # CSS reset / global tokens
+    GlobalStyles.tsx               # CSS reset / global tokens
 ```
+
+> **Convention**: each component's styled-components live in a `<Component>.styled.tsx`
+> sibling file, never inline in the component file.
 
 ## Success Criteria
 
 - Multiple timers can run simultaneously without interfering with each other.
 - Elapsed time is accurate to within ±100 ms over a 1-hour run.
-- Adding, starting, pausing, and stopping timers all work without page reload.
+- Adding, starting, pausing, stopping, and deleting timers all work without page reload.
+- Delete confirmation uses an inline popup — `window.confirm` is never called.
 - The app builds and runs with `npm run dev` and `npm run build` without errors.
 
 ## Future Considerations
