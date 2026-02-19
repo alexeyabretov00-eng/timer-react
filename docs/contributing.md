@@ -109,19 +109,6 @@ The `Timer` component owns its own state. When extending it:
 
 ---
 
-## Pending Feature: Delete Timer
-
-The `onDelete: (id: string) => void` prop and `App.tsx` wiring are already implemented. What's still needed:
-
-- Create `src/components/DeleteButton/DeleteButton.tsx` (extends `ActionButton`)
-- Create `src/components/DeleteButton/index.ts`
-- Add export to `src/components/index.ts`
-- Import and render `<DeleteButton onClick={() => onDelete(id)} />` inside `Timer.tsx`
-
-See `specs/001-delete-timer/` for the full spec.
-
----
-
 ## Before Committing
 
 - [ ] `npm run build` passes (TypeScript + Vite build, no errors)

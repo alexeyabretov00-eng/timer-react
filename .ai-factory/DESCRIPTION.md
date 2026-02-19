@@ -5,13 +5,10 @@ A multi-timer web application built with React and TypeScript. Users can add mul
 
 ## Core Features
 - Add unlimited timers to the workspace
-- Per-timer controls: Start, Pause, Stop (delete scaffolded, awaiting UI)
+- Per-timer controls: Start, Pause, Stop, Delete
 - Elapsed time display (seconds, minutes, hours auto-formatted)
 - Timer state machine: idle → started → paused → idle (via stop)
 - Visual feedback: active timers display differently (white text/separator) vs idle (grey)
-
-## Pending Features (spec ready)
-- **Delete timer** — `onDelete` prop + `App.tsx` wiring exist; `DeleteButton` component not yet created (`specs/001-delete-timer`)
 
 ## Tech Stack
 - **Language:** TypeScript 4.9
@@ -27,8 +24,7 @@ A multi-timer web application built with React and TypeScript. Users can add mul
 - `uuidv4()` is implemented inline in App.tsx for generating unique IDs
 - Components are co-located in `src/components/<ComponentName>/` with an `index.ts` barrel file each
 - Base UI primitives: `Block` (container), `ActionButton` (clickable icon base), `Text`
-- Timer buttons (`StartButton`, `PauseButton`, `StopButton`) extend `ActionButton`
-- `DeleteButton` is planned (spec: `001-delete-timer`) — `onDelete` callback on `Timer` already wired through to `App`
+- Timer buttons (`StartButton`, `PauseButton`, `StopButton`, `DeleteButton`) extend `ActionButton`
 - `AddButton` lives at the App level to append new timers
 - Styling: dark theme — `#696969` card background, `#ffffff` / `#9E9E9E` text states
 

@@ -28,8 +28,7 @@ src/
 │   ├── index.ts              # Barrel — all components re-exported here
 │   ├── ActionButton/         # Base 20×20px clickable icon primitive
 │   ├── AddButton/            # "+" button — adds a new timer to the canvas
-│   ├── Block/                # Dark-grey card container (225px min-width)
-│   ├── PauseButton/          # || icon — extends ActionButton
+│   ├── Block/                # Dark-grey card container (225px min-width)│   ├── DeleteButton/         # × icon — removes the timer, extends ActionButton│   ├── PauseButton/          # || icon — extends ActionButton
 │   ├── StartButton/          # ▶ icon — extends ActionButton
 │   ├── StopButton/           # ■ icon — extends ActionButton (with isActive prop)
 │   ├── Text/                 # Timer display — white (active) / grey (idle)
@@ -52,7 +51,8 @@ App
 │       └── ButtonsWrapper
 │           ├── StartButton  — shown when idle or paused
 │           ├── PauseButton  — shown when started
-│           └── StopButton   — always visible
+│           ├── StopButton   — always visible
+│           └── DeleteButton — always visible
 └── AddButton (appends a new timer)
 ```
 
@@ -71,9 +71,9 @@ idle ──[Start]──► started ──[Pause]──► paused
 
 | State | Running? | Visible buttons |
 |-------|---------|----------------|
-| `idle` | No | Start, Stop |
-| `started` | Yes | Pause, Stop |
-| `paused` | No | Start, Stop |
+| `idle` | No | Start, Stop, Delete |
+| `started` | Yes | Pause, Stop, Delete |
+| `paused` | No | Start, Stop, Delete |
 
 ---
 

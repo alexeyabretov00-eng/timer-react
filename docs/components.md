@@ -12,8 +12,7 @@ Reference for all components in `src/components/`.
 |-----------|------|-------|-------------|
 | `ActionButton` | Styled div | — | Base 20×20px clickable icon primitive |
 | `AddButton` | React.FC | `onClick` | "+" card — appends a new timer |
-| `Block` | Styled div | — | Dark-grey card container |
-| `PauseButton` | React.FC | `onClick` | `||` pause icon |
+| `Block` | Styled div | — | Dark-grey card container || `DeleteButton` | React.FC | `onClick` | × delete icon || `PauseButton` | React.FC | `onClick` | `||` pause icon |
 | `StartButton` | React.FC | `onClick` | `▶` play icon |
 | `StopButton` | React.FC | `isActive`, `onClick` | `■` stop icon, colour changes when active |
 | `Text` | React.FC | `isActive`, `children` | Timer digit display |
@@ -72,6 +71,22 @@ import { Block } from './components';
 A styled `div` — no props. Used as the card shell for `Timer` and `AddButton`.
 
 **Styles:** `min-width: 225px; height: 120px; background: #696969; padding: 20px 0px;`
+
+---
+
+## DeleteButton
+
+```tsx
+import { DeleteButton } from './components';
+
+<DeleteButton onClick={() => onDelete(id)} />
+```
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `onClick` | `() => void` | Called when user clicks delete |
+
+Renders a grey × SVG inside `ActionButton`. Always visible in the timer card.
 
 ---
 
@@ -169,7 +184,7 @@ import { Timer } from './components';
 | `pausedTime` | `useRef<number>` | Epoch timestamp of when timer was paused |
 | `intervalId` | `useRef<number>` | `setTimeout` ID |
 
-> **Note:** `onDelete` is wired through `App.tsx` but the `DeleteButton` UI is not yet rendered — it's part of the pending `specs/001-delete-timer` feature.
+> **Note:** The `Timer` component is fully self-contained. The parent (`App`) only needs to manage the list of timer IDs.
 
 ---
 

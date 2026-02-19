@@ -16,7 +16,7 @@ Then open http://localhost:5173 in your browser.
 ## Key Features
 
 - **Multiple timers** — add unlimited timers to a shared canvas
-- **Independent controls** — each timer has its own Start / Pause / Stop
+- **Independent controls** — each timer has its own Start / Pause / Stop / Delete
 - **Drift-free timing** — uses recursive `setTimeout` with epoch-anchored accuracy
 - **Dark theme** — styled-components CSS-in-JS with active/idle visual states
 
@@ -24,7 +24,7 @@ Then open http://localhost:5173 in your browser.
 
 ```
 [ 1:23 ]           [ 0 ]           [ 45 ]
-[▶] [■]           [▶] [■]         [||] [■]
+[▶] [■] [×]       [▶] [■] [×]     [||] [■] [×]
   idle              idle            running
 ```
 

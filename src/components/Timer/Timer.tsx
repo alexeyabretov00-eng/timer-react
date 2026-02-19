@@ -2,9 +2,15 @@ import { Block } from '../Block';
 import { StopButton } from '../StopButton';
 import { StartButton } from '../StartButton';
 import { PauseButton } from '../PauseButton';
+import { DeleteButton } from '../DeleteButton';
 import { Text } from '../Text';
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+
+interface TimerProps {
+    id: string;
+    onDelete: (id: string) => void;
+}
 
 const formatValue = (value: number): string => {
     const milli = value;
@@ -16,7 +22,7 @@ const formatValue = (value: number): string => {
     return `${hours > 0 ? `${hours}:` : ''}${minutes > 0 ? `${minutes}:` : ''}${seconds}`;
 };
 
-export const Timer = () => {
+export const Timer: React.FC<TimerProps> = ({ id, onDelete }) => {
     const [value, setValue] = useState(0);
     const [status, setStatus] = useState('idle');
     const time = useRef(0);
@@ -93,6 +99,7 @@ export const Timer = () => {
                     {['idle', 'paused'].includes(status) && <StartButton onClick={onStart} />}
                     {status === 'started' && <PauseButton onClick={onPaused} />}
                     <StopButton onClick={onStop} isActive={status === 'started'} />
+                    <DeleteButton onClick={() => onDelete(id)} />
                 </ButtonsWrapper>
             </TimerStyled>
         </Block>

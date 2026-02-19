@@ -30,6 +30,7 @@ timer-react/
     │   ├── ActionButton/   # Base styled div for clickable icons (20x20px)
     │   ├── AddButton/      # Button to add a new timer to the canvas
     │   ├── Block/          # Card container (225px wide, dark grey bg)
+    │   ├── DeleteButton/   # Timer delete control (× icon, extends ActionButton)
     │   ├── PauseButton/    # Timer pause control (extends ActionButton)
     │   ├── StartButton/    # Timer start control (extends ActionButton)
     │   ├── StopButton/     # Timer stop control (extends ActionButton)
@@ -60,7 +61,8 @@ App
 │           └── ButtonsWrapper
 │               ├── StartButton  (shown when idle or paused)
 │               ├── PauseButton  (shown when started)
-│               └── StopButton
+│               ├── StopButton
+│               └── DeleteButton
 └── AddButton
 ```
 
@@ -70,11 +72,6 @@ idle ──[Start]──► started ──[Pause]──► paused
  ▲                  │                    │
  └──────[Stop]──────┘◄──────[Stop]───────┘
 ```
-
-## In-Progress Features
-| Feature | Spec | Status |
-|---------|------|--------|
-| Delete timer | `specs/001-delete-timer/` | `onDelete` prop + App wiring done — `DeleteButton` UI component pending |
 
 ## Documentation
 | Document | Path | Description |

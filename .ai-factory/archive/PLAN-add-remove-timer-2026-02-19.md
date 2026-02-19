@@ -11,17 +11,17 @@ Created: 2026-02-19
 
 ### Phase 1: DeleteButton component
 
-- [ ] Task 1: Create `DeleteButton` component
-- [ ] Task 2: Export `DeleteButton` from barrel (`src/components/index.ts`)
+- [x] Task 1: Create `DeleteButton` component
+- [x] Task 2: Export `DeleteButton` from barrel (`src/components/index.ts`)
 
 ### Phase 2: Wire delete through Timer and App
 
-- [ ] Task 3: Update `Timer` — add `TimerProps`, import + render `DeleteButton` (depends on 1, 2)
-- [ ] Task 4: Update `App` — add `onDeleteTimer`, pass `id` + `onDelete` to `Timer`, fix `uuidv4` TypeScript errors (depends on 3)
+- [x] Task 3: Update `Timer` — add `TimerProps`, import + render `DeleteButton` (depends on 1, 2)
+- [x] Task 4: Update `App` — add `onDeleteTimer`, pass `id` + `onDelete` to `Timer`, fix `uuidv4` TypeScript errors (depends on 3)
 
 ### Phase 3: Docs
 
-- [ ] Task 5: Update docs and context files to reflect feature complete (depends on 4)
+- [x] Task 5: Update docs and context files to reflect feature complete (depends on 4)
 
 ---
 
