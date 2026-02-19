@@ -1,8 +1,8 @@
-import React from "react"
+import { FC } from "react"
 import { ActionButton } from "../ActionButton"
 import styled from "styled-components";
 
-export const StopButton: React.FC<{
+export const StopButton: FC<{
   isActive: boolean;
   onClick: () => void;
 }> = ({ isActive, onClick }) => {

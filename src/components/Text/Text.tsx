@@ -1,8 +1,9 @@
-import React from "react";
+import { FC, ReactNode } from "react";
 import styled from "styled-components";
 
-export const Text: React.FC<{
+export const Text: FC<{
   isActive: boolean;
+  children?: ReactNode;
 }> = ({ isActive, children }) => {
   return <TextStyled isActive={isActive}>{children}</TextStyled>
 }

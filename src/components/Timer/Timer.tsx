@@ -4,7 +4,7 @@ import { StartButton } from '../StartButton';
 import { PauseButton } from '../PauseButton';
 import { DeleteButton } from '../DeleteButton';
 import { Text } from '../Text';
-import React, { useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 const formatValue = (value: number): string => {
@@ -17,7 +17,7 @@ const formatValue = (value: number): string => {
     return `${hours > 0 ? `${hours}:` : ''}${minutes > 0 ? `${minutes}:` : ''}${seconds}`;
 };
 
-export const Timer: React.FC<{ onDelete: () => void }> = ({ onDelete }) => {
+export const Timer: FC<{ onDelete: () => void }> = ({ onDelete }) => {
     const [value, setValue] = useState(0);
     const [status, setStatus] = useState('idle');
     const time = useRef(0);

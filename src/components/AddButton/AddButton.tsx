@@ -1,9 +1,9 @@
-import React from "react";
+import { FC } from "react";
 import styled from "styled-components";
 import { Block } from "../Block";
 import { ActionButton } from "../ActionButton";
 
-export const AddButton: React.FC<{
+export const AddButton: FC<{
   onClick: () => void;
 }> = ({ onClick }) => {
   return (<AddButtonStyled onClick={onClick}>

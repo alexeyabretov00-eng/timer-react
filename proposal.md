@@ -11,7 +11,7 @@ Developers, designers, and knowledge workers frequently need to time multiple co
 ## Goals
 
 - Allow users to add as many independent timers as needed on one page.
-- Provide clear start, pause, and stop controls per timer.
+- Provide clear start, pause, stop, and **delete** controls per timer.
 - Display elapsed time accurately in a human-readable `H:MM:SS` format.
 - Keep the UI minimal, fast, and purely client-side with no backend dependency.
 
@@ -32,6 +32,7 @@ The app is a single-page application with a flat component hierarchy:
 App
 ├── Timer (×N, one per added timer)
 │   ├── Block (card container)
+│   ├── DeleteButton (top-right, removes card)
 │   ├── Text (elapsed time display)
 │   └── Buttons (Start | Pause, Stop)
 └── AddButton (creates a new Timer instance)
@@ -47,6 +48,7 @@ Each `Timer` manages its own state (`idle | started | paused`) and elapsed time 
 | Start | `idle` or `paused` | Timer begins/resumes counting |
 | Pause | `started` | Timer freezes; elapsed time preserved |
 | Stop | `started` or `paused` | Timer resets to `0` and returns to `idle` |
+| Delete | any state | Timer card is removed; timeout cleaned up |
 
 ### Time Display
 
@@ -59,10 +61,10 @@ Elapsed time is rendered as:
 
 | Layer | Technology | Version |
 |-------|-----------|---------|
-| UI Framework | React | 17.0.2 |
-| Language | TypeScript | ~4.9 |
-| Styling | styled-components | 5.3.6 |
-| Build Tool | Vite | ~4.2 |
+| UI Framework | React | 19 |
+| Language | TypeScript | ~5.0 |
+| Styling | styled-components | 6 |
+| Build Tool | Vite | ~6 |
 
 ## Project Structure
 
@@ -76,6 +78,7 @@ src/
     StartButton/            # Start control
     PauseButton/            # Pause control
     StopButton/             # Stop control
+    DeleteButton/           # Removes a timer instance
     Block/                  # Card wrapper
     Text/                   # Elapsed time label
   styles/

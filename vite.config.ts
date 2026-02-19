@@ -6,4 +6,7 @@ export default defineConfig({
   plugins: [react()],
   root: './',
   publicDir: 'public',
+  server: {
+    open: true,
+  },
 })

@@ -1,7 +1,7 @@
-import React from "react"
+import { FC } from "react"
 import { ActionButton } from "../ActionButton"
 
-export const DeleteButton: React.FC<{
+export const DeleteButton: FC<{
   onClick: () => void;
 }> = ({ onClick }) => {
   return (<ActionButton onClick={onClick}>
