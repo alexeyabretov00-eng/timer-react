@@ -23,9 +23,13 @@ export const App = () => {
     ])
   };
 
+  const onDelete = (id: string) => {
+    setTimers(timers.filter(t => t.id !== id));
+  };
+
   return (<AppStyled>
       <GlobalStyles />
-      {timers.map(x => <Timer key={x.id} />)}
+      {timers.map(x => <Timer key={x.id} onDelete={() => onDelete(x.id)} />)}
       <AddButton onClick={onAdd} />
     </AppStyled>
   )

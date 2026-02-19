@@ -2,6 +2,7 @@ import { Block } from '../Block';
 import { StopButton } from '../StopButton';
 import { StartButton } from '../StartButton';
 import { PauseButton } from '../PauseButton';
+import { DeleteButton } from '../DeleteButton';
 import { Text } from '../Text';
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
@@ -16,7 +17,7 @@ const formatValue = (value: number): string => {
     return `${hours > 0 ? `${hours}:` : ''}${minutes > 0 ? `${minutes}:` : ''}${seconds}`;
 };
 
-export const Timer = () => {
+export const Timer: React.FC<{ onDelete: () => void }> = ({ onDelete }) => {
     const [value, setValue] = useState(0);
     const [status, setStatus] = useState('idle');
     const time = useRef(0);
@@ -84,9 +85,18 @@ export const Timer = () => {
         setStatus('paused');
     }
 
+    const handleDelete = () => {
+        clearTimeout(intervalId.current);
+        onDelete();
+    }
+
     return (
-        <Block>
-            <TimerStyled>
+        <TimerContainer>
+            <DeleteButtonWrapper>
+                <DeleteButton onClick={handleDelete} />
+            </DeleteButtonWrapper>
+            <Block>
+                <TimerStyled>
                 <Text isActive={status === 'started'}>{formatValue(value)}</Text>
                 <Separator isActive={status === 'started'}/>
                 <ButtonsWrapper>
@@ -95,9 +105,22 @@ export const Timer = () => {
                     <StopButton onClick={onStop} isActive={status === 'started'} />
                 </ButtonsWrapper>
             </TimerStyled>
-        </Block>
+            </Block>
+        </TimerContainer>
     )
 };
+
+const TimerContainer = styled.div`
+    position: relative;
+    display: inline-flex;
+`;
+
+const DeleteButtonWrapper = styled.div`
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    z-index: 1;
+`;
 
 const TimerStyled = styled.div`
     display: flex;
