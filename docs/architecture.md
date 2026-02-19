@@ -28,7 +28,10 @@ src/
 │   ├── index.ts              # Barrel — all components re-exported here
 │   ├── ActionButton/         # Base 20×20px clickable icon primitive
 │   ├── AddButton/            # "+" button — adds a new timer to the canvas
-│   ├── Block/                # Dark-grey card container (225px min-width)│   ├── DeleteButton/         # × icon — removes the timer, extends ActionButton│   ├── PauseButton/          # || icon — extends ActionButton
+│   ├── Block/                # Dark-grey card container (225px min-width)
+│   ├── ConfirmDialog/        # Popup modal — confirm before deleting a timer
+│   ├── DeleteButton/         # × icon — removes the timer, extends ActionButton
+│   ├── PauseButton/          # || icon — extends ActionButton
 │   ├── StartButton/          # ▶ icon — extends ActionButton
 │   ├── StopButton/           # ■ icon — extends ActionButton (with isActive prop)
 │   ├── Text/                 # Timer display — white (active) / grey (idle)
@@ -45,14 +48,15 @@ src/
 App
 ├── GlobalStyles (CSS reset + font + background)
 ├── Timer (× N — one per timer in the list)
-│   └── Block (card)
-│       ├── Text (elapsed time display)
-│       ├── Separator (hr, white when active)
-│       └── ButtonsWrapper
-│           ├── StartButton  — shown when idle or paused
-│           ├── PauseButton  — shown when started
-│           ├── StopButton   — always visible
-│           └── DeleteButton — always visible
+│   ├── Block (card)
+│   │   ├── Text (elapsed time display)
+│   │   ├── Separator (hr, white when active)
+│   │   └── ButtonsWrapper
+│   │       ├── StartButton  — shown when idle or paused
+│   │       ├── PauseButton  — shown when started
+│   │       ├── StopButton   — always visible
+│   │       └── DeleteButton — always visible
+│   └── ConfirmDialog (rendered when confirmingDelete is true)
 └── AddButton (appends a new timer)
 ```
 
@@ -75,13 +79,16 @@ idle ──[Start]──► started ──[Pause]──► paused
 | `started` | Yes | Pause, Stop, Delete |
 | `paused` | No | Start, Stop, Delete |
 
-**Confirm delete overlay:** Clicking `×` (Delete) is not immediate. Instead it sets a local `confirmingDelete` flag, replacing the button row with an inline prompt:
+**Confirm delete popup:** Clicking `×` (Delete) is not immediate. Instead it sets a local `confirmingDelete` flag, which renders a `ConfirmDialog` modal overlay above the page:
 
 ```
-"DELETE?"  [✓]  [×]
+┌─────────────────────────┐
+│  Delete this timer?   │
+│  [Cancel]  [Delete]   │
+└─────────────────────────┘
 ```
 
-Confirming (`✓`) calls `onDelete(id)`. Cancelling (`×`) clears `confirmingDelete` and returns to the normal button row. The timer continues running in the background during confirmation.
+Confirming calls `onDelete(id)`. Cancelling (or clicking the backdrop) clears `confirmingDelete`. The timer continues running in the background during the dialog.
 
 ---
 

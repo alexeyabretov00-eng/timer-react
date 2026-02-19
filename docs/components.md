@@ -179,7 +179,7 @@ import { Timer } from './components';
 |----------|---------|-------------|
 | `value` | `useState<number>` | Elapsed ms — drives the display |
 | `status` | `useState<string>` | `'idle'` \| `'started'` \| `'paused'` |
-| `confirmingDelete` | `useState<boolean>` | When `true`, shows the inline delete confirmation UI |
+| `confirmingDelete` | `useState<boolean>` | When `true`, renders the `ConfirmDialog` popup |
 | `start` | `useRef<number>` | Epoch timestamp of when timer started |
 | `time` | `useRef<number>` | Accumulated ticks (drift correction) |
 | `pausedTime` | `useRef<number>` | Epoch timestamp of when timer was paused |
@@ -187,15 +187,37 @@ import { Timer } from './components';
 
 **Confirm delete behaviour:**
 
-Clicking `×` sets `confirmingDelete = true`, replacing the button row with an inline prompt:
+Clicking `×` sets `confirmingDelete = true`, which renders a `<ConfirmDialog>` modal overlay above the page:
 
 ```
-"DELETE?"  [✓ confirm]  [× cancel]
+┌─────────────────────────┐
+│  Delete this timer?   │
+│  [Cancel]  [Delete]   │
+└─────────────────────────┘
 ```
 
-Confirming calls `onDelete(id)`. Cancelling resets `confirmingDelete` to `false`.
+Confirming calls `onDelete(id)`. Cancelling (or clicking outside the card) resets `confirmingDelete` to `false`. The timer continues running during the dialog.
 
 > **Note:** The `Timer` component is fully self-contained. The parent (`App`) only needs to manage the list of timer IDs.
+
+---
+
+## ConfirmDialog
+
+A full-screen popup modal shown when a timer is about to be deleted.
+
+```tsx
+import { ConfirmDialog } from './components';
+
+<ConfirmDialog onConfirm={() => handleDelete()} onCancel={() => setConfirming(false)} />
+```
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `onConfirm` | `() => void` | Called when user clicks **Delete** |
+| `onCancel` | `() => void` | Called when user clicks **Cancel** or the backdrop |
+
+Renders a semi-transparent backdrop (`rgba(0,0,0,0.6)`) with a centred dark card. Clicking outside the card triggers `onCancel`.
 
 ---
 

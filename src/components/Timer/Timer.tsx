@@ -4,8 +4,9 @@ import { StartButton } from '../StartButton';
 import { PauseButton } from '../PauseButton';
 import { DeleteButton } from '../DeleteButton';
 import { Text } from '../Text';
+import { ConfirmDialog } from '../ConfirmDialog';
 import React, { useEffect, useRef, useState } from 'react';
-import { TimerStyled, ButtonsWrapper, Separator, ConfirmWrapper, ConfirmPrompt, ConfirmButton, CancelButton } from './Timer.styled';
+import { TimerStyled, ButtonsWrapper, Separator } from './Timer.styled';
 
 interface TimerProps {
     id: string;
@@ -92,34 +93,25 @@ export const Timer: React.FC<TimerProps> = ({ id, onDelete }) => {
     }
 
     return (
-        <Block>
-            <TimerStyled>
-                <Text isActive={status === 'started'}>{formatValue(value)}</Text>
-                <Separator isActive={status === 'started'}/>
-                {confirmingDelete ? (
-                    <ConfirmWrapper>
-                        <ConfirmPrompt>DELETE?</ConfirmPrompt>
-                        <ConfirmButton onClick={() => onDelete(id)}>
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M3 10L8 15L17 5" stroke="#9E9E9E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                        </ConfirmButton>
-                        <CancelButton onClick={() => setConfirmingDelete(false)}>
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="2.22266" y="0.808594" width="24" height="2" rx="1" transform="rotate(45 2.22266 0.808594)" fill="#9E9E9E" />
-                                <rect x="0.808594" y="17.7773" width="24" height="2" rx="1" transform="rotate(-45 0.808594 17.7773)" fill="#9E9E9E" />
-                            </svg>
-                        </CancelButton>
-                    </ConfirmWrapper>
-                ) : (
+        <>
+            <Block>
+                <TimerStyled>
+                    <Text isActive={status === 'started'}>{formatValue(value)}</Text>
+                    <Separator isActive={status === 'started'}/>
                     <ButtonsWrapper>
                         {['idle', 'paused'].includes(status) && <StartButton onClick={onStart} />}
                         {status === 'started' && <PauseButton onClick={onPaused} />}
                         <StopButton onClick={onStop} isActive={status === 'started'} />
                         <DeleteButton onClick={() => setConfirmingDelete(true)} />
                     </ButtonsWrapper>
-                )}
-            </TimerStyled>
-        </Block>
+                </TimerStyled>
+            </Block>
+            {confirmingDelete && (
+                <ConfirmDialog
+                    onConfirm={() => onDelete(id)}
+                    onCancel={() => setConfirmingDelete(false)}
+                />
+            )}
+        </>
     )
 };

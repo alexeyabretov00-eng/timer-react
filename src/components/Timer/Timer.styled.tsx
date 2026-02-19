@@ -22,28 +22,3 @@ export const Separator = styled.div<{ isActive: boolean }>`
     border: 1px solid ${props => props.isActive ? '#ffffff' : '#9E9E9E'};
     width: 100%;
 `;
-
-export const ConfirmWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    column-gap: 16px;
-`;
-
-export const ConfirmPrompt = styled.span`
-    font-size: 12px;
-    color: #9E9E9E;
-    letter-spacing: 0.05em;
-`;
-
-export const ConfirmButton = styled.div`
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-`;
-
-export const CancelButton = styled.div`
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-`;

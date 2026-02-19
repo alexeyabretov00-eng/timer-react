@@ -17,7 +17,7 @@ Then open http://localhost:5173 in your browser.
 
 - **Multiple timers** — add unlimited timers to a shared canvas
 - **Independent controls** — each timer has its own Start / Pause / Stop / Delete
-- **Delete confirmation** — clicking × shows an inline prompt before removing a timer
+- **Delete confirmation** — clicking × opens a popup dialog before removing a timer
 - **Drift-free timing** — uses recursive `setTimeout` with epoch-anchored accuracy
 - **Dark theme** — styled-components CSS-in-JS with active/idle visual states
 
@@ -28,9 +28,11 @@ Then open http://localhost:5173 in your browser.
 [▶] [■] [×]       [▶] [■] [×]     [||] [■] [×]
   idle              idle            running
 
-# Click × on a running timer → inline confirmation:
-[ 45 ]
-DELETE? [✓] [×]
+# Click × → popup dialog:
+┌─────────────────────────┐
+│  Delete this timer?   │
+│  [Cancel]  [Delete]   │
+└─────────────────────────┘
 ```
 
 ---
