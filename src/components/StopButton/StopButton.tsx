@@ -1,6 +1,6 @@
 import React from "react"
 import { ActionButton } from "../ActionButton"
-import styled from "styled-components";
+import { StopButtonStyled } from "./StopButton.styled";
 
 export const StopButton: React.FC<{
   isActive: boolean;
@@ -15,9 +15,3 @@ export const StopButton: React.FC<{
   </StopButtonStyled>
   )
 }
-
-const StopButtonStyled = styled.div<{ isActive: boolean; }>`
-    rect {
-        fill: ${props => props.isActive ? '#ffffff' : '#9E9E9E'};
-    }
-`;

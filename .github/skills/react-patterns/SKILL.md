@@ -23,8 +23,9 @@ Every component lives in its own directory with a barrel export:
 
 ```
 src/components/ComponentName/
-├── ComponentName.tsx     # Component implementation
-└── index.ts             # Barrel: export { ComponentName } from './ComponentName'
+├── ComponentName.tsx        # Component implementation
+├── ComponentName.styled.tsx # Styled components (all styled.* definitions)
+└── index.ts                 # Barrel: export { ComponentName } from './ComponentName'
 ```
 
 All components are re-exported from `src/components/index.ts`.
@@ -49,9 +50,11 @@ import { Timer, AddButton } from './components';
 
 ## Component Template
 
+**`ComponentName.tsx`:**
+
 ```tsx
 import React from 'react';
-import styled from 'styled-components';
+import { ComponentNameStyled } from './ComponentName.styled';
 
 interface ComponentNameProps {
   // props here
@@ -64,15 +67,22 @@ export const ComponentName: React.FC<ComponentNameProps> = ({ /* props */ }) => 
     </ComponentNameStyled>
   );
 };
+```
 
-const ComponentNameStyled = styled.div`
+**`ComponentName.styled.tsx`:**
+
+```tsx
+import styled from 'styled-components';
+
+export const ComponentNameStyled = styled.div`
   /* styles */
 `;
 ```
 
 **Rules:**
 - Use `React.FC<Props>` for all components
-- Keep logic and styled components in the same file
+- **All `styled.*` definitions go in `<ComponentName>.styled.tsx`** — never inline in the component file
+- Import styled components from `.styled.tsx` into the component file
 - Name the root styled component `<ComponentName>Styled`
 - Export only the component (no default exports)
 

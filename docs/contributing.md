@@ -23,8 +23,9 @@ Every component lives in its own directory:
 
 ```
 src/components/ComponentName/
-├── ComponentName.tsx    # Component + its styled components
-└── index.ts             # export { ComponentName } from './ComponentName'
+├── ComponentName.tsx        # Component implementation
+├── ComponentName.styled.tsx # Styled components (all styled.* definitions)
+└── index.ts                 # export { ComponentName } from './ComponentName'
 ```
 
 Add the new export to `src/components/index.ts`.
@@ -33,7 +34,7 @@ Add the new export to `src/components/index.ts`.
 
 ```tsx
 import React from 'react';
-import styled from 'styled-components';
+import { ComponentNameStyled } from './ComponentName.styled';
 
 interface ComponentNameProps {
   // props
@@ -46,8 +47,14 @@ export const ComponentName: React.FC<ComponentNameProps> = ({ /* props */ }) => 
     </ComponentNameStyled>
   );
 };
+```
 
-const ComponentNameStyled = styled.div`
+**`ComponentName.styled.tsx`:**
+
+```tsx
+import styled from 'styled-components';
+
+export const ComponentNameStyled = styled.div`
   /* styles */
 `;
 ```
@@ -56,7 +63,8 @@ const ComponentNameStyled = styled.div`
 - Use `React.FC<Props>` with explicit interface
 - Root styled component named `<ComponentName>Styled`
 - Named exports only — no `export default`
-- Keep logic and styled components in the same `.tsx` file
+- **All `styled.*` definitions go in `<ComponentName>.styled.tsx`**, not in the component file
+- Import styled components from `.styled.tsx` into the component file
 
 ### Styling
 

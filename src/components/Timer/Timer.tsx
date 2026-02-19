@@ -5,7 +5,7 @@ import { PauseButton } from '../PauseButton';
 import { DeleteButton } from '../DeleteButton';
 import { Text } from '../Text';
 import React, { useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
+import { TimerStyled, ButtonsWrapper, Separator, ConfirmWrapper, ConfirmPrompt, ConfirmButton, CancelButton } from './Timer.styled';
 
 interface TimerProps {
     id: string;
@@ -123,53 +123,3 @@ export const Timer: React.FC<TimerProps> = ({ id, onDelete }) => {
         </Block>
     )
 };
-
-const TimerStyled = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    column-gap: 50px;
-    height: 100%;
-    width: 100%;
-`;
-
-const ButtonsWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    column-gap: 50px;
-`;
-
-const ConfirmWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    column-gap: 16px;
-`;
-
-const ConfirmPrompt = styled.span`
-    font-size: 12px;
-    color: #9E9E9E;
-    letter-spacing: 0.05em;
-`;
-
-const ConfirmButton = styled.div`
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-`;
-
-const CancelButton = styled.div`
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-`;
-
-const Separator = styled.div<{
-    isActive: boolean;
-}>`
-    height: 0px;
-    border: 1px solid ${props => props.isActive ? '#ffffff': '#9E9E9E'};
-    width: 100%;
-`;

@@ -123,8 +123,9 @@ Each component lives in its own directory with a barrel export:
 
 ```
 src/components/ComponentName/
-├── ComponentName.tsx    # Implementation
-└── index.ts             # export { ComponentName } from './ComponentName'
+├── ComponentName.tsx        # Implementation
+├── ComponentName.styled.tsx # Styled components (all styled.* definitions)
+└── index.ts                 # export { ComponentName } from './ComponentName'
 ```
 
 All components are re-exported from `src/components/index.ts` — consumed as:

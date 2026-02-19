@@ -1,7 +1,7 @@
 import React from "react";
-import styled from "styled-components";
 import { Block } from "../Block";
 import { ActionButton } from "../ActionButton";
+import { AddButtonStyled } from "./AddButton.styled";
 
 export const AddButton: React.FC<{
   onClick: () => void;
@@ -17,7 +17,3 @@ export const AddButton: React.FC<{
     </Block>
   </AddButtonStyled>)
 }
-
-const AddButtonStyled = styled.div`
-  cursor: pointer;
-`;
