@@ -37,8 +37,8 @@ Confirm view:
 
 ### Phase 1: Core Implementation
 
-- [ ] Task 1: Update `Timer.tsx` — add confirm delete state + UI
-- [ ] Task 2: Update docs — components.md, architecture.md
+- [x] Task 1: Update `Timer.tsx` — add confirm delete state + UI
+- [x] Task 2: Update docs — components.md, architecture.md
 
 <!-- 🔄 Single commit after both tasks: feat: add inline confirmation before timer delete -->
 

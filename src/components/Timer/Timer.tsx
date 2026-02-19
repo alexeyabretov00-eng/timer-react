@@ -25,6 +25,7 @@ const formatValue = (value: number): string => {
 export const Timer: React.FC<TimerProps> = ({ id, onDelete }) => {
     const [value, setValue] = useState(0);
     const [status, setStatus] = useState('idle');
+    const [confirmingDelete, setConfirmingDelete] = useState(false);
     const time = useRef(0);
     const start = useRef(0);
     const pausedTime = useRef(0);
@@ -95,12 +96,29 @@ export const Timer: React.FC<TimerProps> = ({ id, onDelete }) => {
             <TimerStyled>
                 <Text isActive={status === 'started'}>{formatValue(value)}</Text>
                 <Separator isActive={status === 'started'}/>
-                <ButtonsWrapper>
-                    {['idle', 'paused'].includes(status) && <StartButton onClick={onStart} />}
-                    {status === 'started' && <PauseButton onClick={onPaused} />}
-                    <StopButton onClick={onStop} isActive={status === 'started'} />
-                    <DeleteButton onClick={() => onDelete(id)} />
-                </ButtonsWrapper>
+                {confirmingDelete ? (
+                    <ConfirmWrapper>
+                        <ConfirmPrompt>DELETE?</ConfirmPrompt>
+                        <ConfirmButton onClick={() => onDelete(id)}>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 10L8 15L17 5" stroke="#9E9E9E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        </ConfirmButton>
+                        <CancelButton onClick={() => setConfirmingDelete(false)}>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="2.22266" y="0.808594" width="24" height="2" rx="1" transform="rotate(45 2.22266 0.808594)" fill="#9E9E9E" />
+                                <rect x="0.808594" y="17.7773" width="24" height="2" rx="1" transform="rotate(-45 0.808594 17.7773)" fill="#9E9E9E" />
+                            </svg>
+                        </CancelButton>
+                    </ConfirmWrapper>
+                ) : (
+                    <ButtonsWrapper>
+                        {['idle', 'paused'].includes(status) && <StartButton onClick={onStart} />}
+                        {status === 'started' && <PauseButton onClick={onPaused} />}
+                        <StopButton onClick={onStop} isActive={status === 'started'} />
+                        <DeleteButton onClick={() => setConfirmingDelete(true)} />
+                    </ButtonsWrapper>
+                )}
             </TimerStyled>
         </Block>
     )
@@ -121,6 +139,31 @@ const ButtonsWrapper = styled.div`
     align-items: center;
     justify-content: center;
     column-gap: 50px;
+`;
+
+const ConfirmWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 16px;
+`;
+
+const ConfirmPrompt = styled.span`
+    font-size: 12px;
+    color: #9E9E9E;
+    letter-spacing: 0.05em;
+`;
+
+const ConfirmButton = styled.div`
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+`;
+
+const CancelButton = styled.div`
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
 `;
 
 const Separator = styled.div<{

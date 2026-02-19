@@ -179,10 +179,21 @@ import { Timer } from './components';
 |----------|---------|-------------|
 | `value` | `useState<number>` | Elapsed ms — drives the display |
 | `status` | `useState<string>` | `'idle'` \| `'started'` \| `'paused'` |
+| `confirmingDelete` | `useState<boolean>` | When `true`, shows the inline delete confirmation UI |
 | `start` | `useRef<number>` | Epoch timestamp of when timer started |
 | `time` | `useRef<number>` | Accumulated ticks (drift correction) |
 | `pausedTime` | `useRef<number>` | Epoch timestamp of when timer was paused |
 | `intervalId` | `useRef<number>` | `setTimeout` ID |
+
+**Confirm delete behaviour:**
+
+Clicking `×` sets `confirmingDelete = true`, replacing the button row with an inline prompt:
+
+```
+"DELETE?"  [✓ confirm]  [× cancel]
+```
+
+Confirming calls `onDelete(id)`. Cancelling resets `confirmingDelete` to `false`.
 
 > **Note:** The `Timer` component is fully self-contained. The parent (`App`) only needs to manage the list of timer IDs.
 

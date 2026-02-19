@@ -75,6 +75,14 @@ idle ──[Start]──► started ──[Pause]──► paused
 | `started` | Yes | Pause, Stop, Delete |
 | `paused` | No | Start, Stop, Delete |
 
+**Confirm delete overlay:** Clicking `×` (Delete) is not immediate. Instead it sets a local `confirmingDelete` flag, replacing the button row with an inline prompt:
+
+```
+"DELETE?"  [✓]  [×]
+```
+
+Confirming (`✓`) calls `onDelete(id)`. Cancelling (`×`) clears `confirmingDelete` and returns to the normal button row. The timer continues running in the background during confirmation.
+
 ---
 
 ## Timing Implementation
