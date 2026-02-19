@@ -62,7 +62,9 @@ Serves the `dist/` build locally to verify before deploying.
 3. Click **▶** (Start) — the timer starts counting.
 4. Click **||** (Pause) — time freezes, then **▶** resumes from where you left off.
 5. Click **■** (Stop) — resets the timer to 0.
-6. Click **×** (Delete) — removes the timer card entirely.
+6. Click **×** (Delete) — an inline confirmation appears: `DELETE? [✓] [×]`.
+   - Click **✓** to confirm — the timer is removed.
+   - Click **×** to cancel — returns to the normal controls.
 7. Add multiple timers and control each independently.
 
 ---
