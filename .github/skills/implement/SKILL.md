@@ -278,14 +278,27 @@ If documentation preference is "yes":
 **Handle plan file after completion:**
 
 - **If `.ai-factory/PLAN.md`** (direct /ai-factory.task, not from /ai-factory.feature):
-  ```
-  Would you like to delete .ai-factory/PLAN.md? (It's no longer needed)
-  - [ ] Yes, delete it
-  - [ ] No, keep it
-  ```
+
+  **Auto-archive PLAN.md — do this automatically, no prompt needed:**
+
+  1. Ensure `.ai-factory/archive/` directory exists:
+     ```bash
+     mkdir -p .ai-factory/archive
+     ```
+  2. Derive a slug from the plan title (first `# ` heading), lowercase, spaces→hyphens, strip special chars. E.g. "Add Product Search" → `add-product-search`.
+  3. Get today's date: `YYYY-MM-DD`.
+  4. Copy and delete:
+     ```bash
+     cp .ai-factory/PLAN.md .ai-factory/archive/PLAN-<slug>-<date>.md
+     rm .ai-factory/PLAN.md
+     ```
+  5. Confirm to user:
+     ```
+     Plan archived to: .ai-factory/archive/PLAN-<slug>-<date>.md
+     ```
 
 - **If branch-named file** (e.g., `.ai-factory/features/feature-user-auth.md`):
-  - Keep it - documents what was done
+  - Keep it — documents what was done
   - User can delete before merging if desired
 
 **Check if running in a git worktree:**
