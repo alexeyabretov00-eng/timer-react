@@ -1,4 +1,5 @@
-```markdown
+## MODIFIED Requirements
+
 ### Requirement: User can delete a timer
 Each Timer card SHALL provide a Delete action that permanently removes that timer from the active list.
 
@@ -44,5 +45,3 @@ The timer's elapsed time MAY continue to advance while the confirmation UI is di
 #### Scenario: Confirmation UI does not use browser dialog
 - **WHEN** the user activates the Delete control on any timer
 - **THEN** no browser-native dialog (`window.confirm` or equivalent) is shown; a custom popup is displayed using a React portal rendered into `document.body`
-
-```

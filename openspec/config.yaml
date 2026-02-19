@@ -1,20 +1,10 @@
 schema: spec-driven
 
-# Project context (optional)
-# This is shown to AI when creating artifacts.
-# Add your tech stack, conventions, style guides, domain knowledge, etc.
-# Example:
-#   context: |
-#     Tech stack: TypeScript, React, Node.js
-#     We use conventional commits
-#     Domain: e-commerce platform
-
-# Per-artifact rules (optional)
-# Add custom rules for specific artifacts.
-# Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always include a "Non-goals" section
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
+context: |
+  Tech stack: React 19, TypeScript 5, styled-components 6, Vite 6
+  Component convention: each component lives in src/components/<ComponentName>/
+    with <ComponentName>.tsx (logic + JSX) and <ComponentName>.styled.tsx (all
+    styled-components). Styled components are never defined inline in the main
+    component file — they are always imported from the .styled.tsx sibling file.
+  Entry point: index.tsx using createRoot from react-dom/client.
+  No window.confirm — use custom in-app UI for confirmations.

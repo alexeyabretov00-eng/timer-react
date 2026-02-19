@@ -3,6 +3,7 @@ import { StopButton } from '../StopButton';
 import { StartButton } from '../StartButton';
 import { PauseButton } from '../PauseButton';
 import { DeleteButton } from '../DeleteButton';
+import { ConfirmDeletePopup } from '../ConfirmDeletePopup';
 import { Text } from '../Text';
 import { FC, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
@@ -20,6 +21,7 @@ const formatValue = (value: number): string => {
 export const Timer: FC<{ onDelete: () => void }> = ({ onDelete }) => {
     const [value, setValue] = useState(0);
     const [status, setStatus] = useState('idle');
+    const [showConfirm, setShowConfirm] = useState(false);
     const time = useRef(0);
     const start = useRef(0);
     const pausedTime = useRef(0);
@@ -86,12 +88,26 @@ export const Timer: FC<{ onDelete: () => void }> = ({ onDelete }) => {
     }
 
     const handleDelete = () => {
+        setShowConfirm(true);
+    }
+
+    const handleConfirmDelete = () => {
         clearTimeout(intervalId.current);
         onDelete();
     }
 
+    const handleCancelDelete = () => {
+        setShowConfirm(false);
+    }
+
     return (
         <TimerContainer>
+            {showConfirm && (
+                <ConfirmDeletePopup
+                    onConfirm={handleConfirmDelete}
+                    onCancel={handleCancelDelete}
+                />
+            )}
             <DeleteButtonWrapper>
                 <DeleteButton onClick={handleDelete} />
             </DeleteButtonWrapper>
@@ -100,7 +116,7 @@ export const Timer: FC<{ onDelete: () => void }> = ({ onDelete }) => {
                 <Text isActive={status === 'started'}>{formatValue(value)}</Text>
                 <Separator isActive={status === 'started'}/>
                 <ButtonsWrapper>
-                    {['idle', 'paused'].includes(status) && <StartButton onClick={onStart} />}
+                    {['idle', 'paused'].includes(status) && !showConfirm && <StartButton onClick={onStart} />}
                     {status === 'started' && <PauseButton onClick={onPaused} />}
                     <StopButton onClick={onStop} isActive={status === 'started'} />
                 </ButtonsWrapper>
